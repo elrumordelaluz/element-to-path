@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/elrumordelaluz/element-to-path.git",
-  "author": "Lionel T <elrumordelaluz@hotmail.com> (https://elrumordelaluz.com/)",
+  "author":
+    "Lionel T <elrumordelaluz@hotmail.com> (https://elrumordelaluz.com/)",
   "license": "MIT",
   "devDependencies": {
     "clipboardy": "1.2.3",
     "fast-copy": "1.2.1",
     "svgson-next": "4.0.0"
-  }
+  },
+  "keywords": ["svg", "path", "paths", "conversion"],
+  "files": ["index.js", "README.md"]
 }

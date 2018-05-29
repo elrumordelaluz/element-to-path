@@ -8,6 +8,6 @@
   "devDependencies": {
     "clipboardy": "1.2.3",
     "fast-copy": "1.2.1",
-    "svgson-next": "3.0.4"
+    "svgson-next": "4.0.0"
   }
 }

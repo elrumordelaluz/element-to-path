@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Element to Path" title="Element to Path" src="logo.svg" width="450">
+  <img alt="Element to Path" title="Element to Path" src="https://cdn.rawgit.com/elrumordelaluz/element-to-path/8f33cf5f/logo.svg" width="450">
 </p>
 
 <p align="center">

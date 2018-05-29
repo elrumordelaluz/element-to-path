@@ -10,7 +10,7 @@ const calcValue = (val, base) => {
   return /%$/.test(val) ? val.replace('%', '') * 100 / base : +val
 }
 
-// https://www.w3.org/TR/SVG2/shapes.html
+// source of calculations https://www.w3.org/TR/SVG2/shapes.html
 
 const toRect = attrs => {
   const w = +attrs.width
@@ -87,7 +87,7 @@ const toPathString = d => {
   return Array.isArray(d) ? d.join(' ') : ''
 }
 
-module.exports = function toPath(node) {
+const elementToPath = node => {
   const { name, attributes } = node
   let d
   if (name === 'rect') {
@@ -116,3 +116,5 @@ module.exports = function toPath(node) {
 
   return toPathString(d)
 }
+
+module.exports = elementToPath

@@ -1,47 +1,120 @@
-const svgson = require('svgson-next').default
-const stringify = require('svgson-next').stringify
-const copy = require('fast-copy').default
-const toPath = require('./index')
-const { write: copyToClipboard } = require('clipboardy')
+import test from 'ava'
+import toPath from './'
 
-const SVG = `
-<svg viewBox="0 0 65 65">
-  <rect x="0.5" y="0.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="64" height="64"/>
-  <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="45.3" y1="4.4" x2="11.9" y2="62.2"/>
-  <circle fill="none" stroke="#000000" stroke-miterlimit="10" cx="19" cy="18.1" r="9.6"/>
-  <ellipse fill="none" stroke="#000000" stroke-miterlimit="10" cx="46.2" cy="47" rx="7.7" ry="10.3"/>
-  <polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="7.5,32.5 21.3,33.3 14.4,47 "/>
-  <polygon fill="none" stroke="#000000" stroke-miterlimit="10" points="48.4,10.3 57.2,23.7 42.3,28.4 "/>
-  <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M21.8,60.4c0,0,0.2-18.3,4.4-10.1s6.5,3.2,6.5,3.2"/>
-</svg>
-`
-
-const elemToPath = node => {
-  let o = copy(node)
-
-  if (/(rect|circle|ellipse|polygon|polyline|line|path)/.test(o.name)) {
-    o.attributes = Object.assign({}, o.attributes, {
-      d: toPath(o),
-    })
-    for (const attr in o.attributes) {
-      if (!/fill|stroke|opacity|d/.test(attr)) {
-        delete o.attributes[attr]
-      }
-    }
-    o.name = 'path'
-  } else if (o.children && Array.isArray(o.children)) {
-    o.children = o.children.map(elemToPath)
-  }
-
-  return o
+const rect = {
+  type: 'element',
+  name: 'rect',
+  attributes: {
+    x: 0.5,
+    y: 0.5,
+    width: 10,
+    height: 10,
+  },
 }
 
-const init = async input => {
-  const json = await svgson(input)
-  const converted = elemToPath(json)
-  const result = stringify(converted)
-  console.log(result)
-  await copyToClipboard(result)
+const rectToPath = 'M0.5 0.5 H10.5 V10.5 H0.5 V0.5 z'
+
+test('Rect to Path', t => {
+  const path = toPath(rect)
+  t.is(path, rectToPath)
+})
+
+const circle = {
+  type: 'element',
+  name: 'circle',
+  attributes: {
+    cx: 10,
+    cy: 10,
+    r: 5,
+  },
 }
 
-init(SVG)
+const circleToPath =
+  'M15 10 A5 5 0 0 1 10 15 A5 5 0 0 1 5 10 A5 5 0 0 1 15 10 z'
+
+test('Circle to Path', t => {
+  const path = toPath(circle)
+  t.is(path, circleToPath)
+})
+
+const ellipse = {
+  type: 'element',
+  name: 'ellipse',
+  attributes: {
+    cx: 10,
+    cy: 10,
+    rx: 5,
+    ry: 7,
+  },
+}
+
+const ellipseToPath =
+  'M15 10 A5 7 0 0 1 10 17 A5 7 0 0 1 5 10 A5 7 0 0 1 15 10 z'
+
+test('Ellipse to Path', t => {
+  const path = toPath(ellipse)
+  t.is(path, ellipseToPath)
+})
+
+const line = {
+  type: 'element',
+  name: 'line',
+  attributes: {
+    x1: 3,
+    y1: 2,
+    x2: 10,
+    y2: 7,
+  },
+}
+
+const lineToPath = 'M3 2 L10 7'
+
+test('Line to Path', t => {
+  const path = toPath(line)
+  t.is(path, lineToPath)
+})
+
+const polyline = {
+  type: 'element',
+  name: 'polyline',
+  attributes: {
+    points: '5,2.5 10,3 12.5,14.3',
+  },
+}
+
+const polylineToPath = 'M5 2.5 L10 3 L12.5 14.3'
+
+test('Polyline to Path', t => {
+  const path = toPath(polyline)
+  t.is(path, polylineToPath)
+})
+
+const polygon = {
+  type: 'element',
+  name: 'polygon',
+  attributes: {
+    points: '5,2.5 10,3 12.5,14.3',
+  },
+}
+
+const polygonToPath = 'M5 2.5 L10 3 L12.5 14.3 Z'
+
+test('Polygon to Path', t => {
+  const path = toPath(polygon)
+  t.is(path, polygonToPath)
+})
+
+const d = 'M21.8,60.4c0,0,0.2-18.3,4.4-10.1s6.5,3.2,6.5,3.2'
+const path = {
+  type: 'element',
+  name: 'path',
+  attributes: {
+    d,
+  },
+}
+
+test('Same when is Path', t => {
+  t.is(toPath(path), d)
+})
+
+// Results: https://codepen.io/elrumordelaluz/pen/JZjaxw?editors=1000

@@ -12,7 +12,7 @@ const calcValue = (val, base) => {
 
 // source of calculations https://www.w3.org/TR/SVG2/shapes.html
 
-const toRect = attrs => {
+const rect = attrs => {
   const w = +attrs.width
   const h = +attrs.height
   const x = attrs.x ? +attrs.x : 0
@@ -50,7 +50,7 @@ const toRect = attrs => {
   ]
 }
 
-const toEllipse = attrs => {
+const ellipse = attrs => {
   const cx = +attrs.cx
   const cy = +attrs.cy
   const rx = attrs.rx ? +attrs.rx : +attrs.r
@@ -64,11 +64,11 @@ const toEllipse = attrs => {
   ]
 }
 
-const toLine = ({ x1, y1, x2, y2 }) => {
+const line = ({ x1, y1, x2, y2 }) => {
   return [`M${+x1} ${+y1}`, `L${+x2} ${+y2}`]
 }
 
-const toPoly = attrs => {
+const poly = attrs => {
   const { points } = attrs
   const pointsArray = points
     .trim()
@@ -91,23 +91,23 @@ const elementToPath = node => {
   const { name, attributes } = node
   let d
   if (name === 'rect') {
-    d = toRect(attributes)
+    d = rect(attributes)
   }
 
   if (name === 'circle' || name === 'ellipse') {
-    d = toEllipse(attributes)
+    d = ellipse(attributes)
   }
 
   if (name === 'line') {
-    d = toLine(attributes)
+    d = line(attributes)
   }
 
   if (name === 'polyline') {
-    d = toPoly(attributes)
+    d = poly(attributes)
   }
 
   if (name === 'polygon') {
-    d = [...toPoly(attributes), 'Z']
+    d = [...poly(attributes), 'Z']
   }
 
   if (name === 'path') {

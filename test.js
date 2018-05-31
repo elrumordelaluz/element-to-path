@@ -117,4 +117,25 @@ test('Same when is Path', t => {
   t.is(toPath(path), d)
 })
 
+const rectCustomKeys = {
+  type: 'element',
+  foo: 'rect',
+  props: {
+    x: 0.5,
+    y: 0.5,
+    width: 10,
+    height: 10,
+  },
+}
+
+const rectToPathCustomKeys = 'M0.5 0.5 H10.5 V10.5 H0.5 V0.5 z'
+
+test('Custom keys', t => {
+  const path = toPath(rectCustomKeys, {
+    nodeName: 'foo',
+    nodeAttrs: 'props',
+  })
+  t.is(path, rectToPathCustomKeys)
+})
+
 // Results: https://codepen.io/elrumordelaluz/pen/JZjaxw?editors=1000

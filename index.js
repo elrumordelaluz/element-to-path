@@ -87,8 +87,12 @@ const toPathString = d => {
   return Array.isArray(d) ? d.join(' ') : ''
 }
 
-const elementToPath = node => {
-  const { name, attributes } = node
+const elementToPath = (
+  node,
+  { nodeName = 'name', nodeAttrs = 'attributes' } = {}
+) => {
+  const name = node[nodeName]
+  const attributes = node[nodeAttrs]
   let d
   if (name === 'rect') {
     d = rect(attributes)

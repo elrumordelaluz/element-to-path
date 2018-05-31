@@ -16,20 +16,6 @@ yarn add element-to-path
 
 ## Usage
 
-`Object` element: [svgson](https://github.com/elrumordelaluz/svgson-next) node notation
-
-```js
-{
-  type: 'element',
-  name: 'rect|circle|ellipse|line|polyline|polygon|path'
-  attributes: {
-    // depends on each element
-  }
-}
-```
-
-## Example
-
 ```js
 const toPath = require('element-to-path')
 
@@ -46,3 +32,50 @@ const circle = {
 const path = toPath(circle)
 // 'M15 10 A5 5 0 0 1 10 15 A5 5 0 0 1 5 10 A5 5 0 0 1 15 10 z'
 ```
+
+## API
+
+### toPath(elem,[options])
+
+#### elem
+
+Type: `Object`
+Element to convert. Default notation is [svgson](https://github.com/elrumordelaluz/svgson-next) based:
+
+```js
+{
+  type: 'element', // could be ignored
+  name: 'rect|circle|ellipse|line|polyline|polygon|path'
+  attributes: {
+    // depends on each element
+  }
+}
+```
+
+#### options
+
+Type: `Object`
+
+##### nodeName
+
+Type: `string`<br>
+Default: `name`
+
+Use custom **name** key in `elem` input
+
+##### nodeAttrs
+
+Type: `string`<br>
+Default: `attributes`
+
+Use custom **attributes** key in `elem` input
+
+## Related
+
+[path-that-svg!](https://github.com/elrumordelaluz/path-that-svg) Convert an entire `SVG` using `path`s
+
+All calculations are based on [W3C Spec]
+
+## License
+
+MIT © [Lionel Tzatzkin](https://lionel.tzatzk.in)

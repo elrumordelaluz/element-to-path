@@ -74,7 +74,7 @@ Use custom **attributes** key in `elem` input
 
 [path-that-svg!](https://github.com/elrumordelaluz/path-that-svg) Convert an entire `SVG` using `path`s
 
-All calculations are based on [W3C Spec]
+All calculations are based on [W3C Spec](https://www.w3.org/TR/SVG2/shapes.html)
 
 ## License
 

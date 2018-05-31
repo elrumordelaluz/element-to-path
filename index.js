@@ -10,8 +10,6 @@ const calcValue = (val, base) => {
   return /%$/.test(val) ? val.replace('%', '') * 100 / base : +val
 }
 
-// source of calculations https://www.w3.org/TR/SVG2/shapes.html
-
 const rect = attrs => {
   const w = +attrs.width
   const h = +attrs.height

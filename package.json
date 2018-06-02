@@ -3,7 +3,8 @@
   "version": "1.1.0",
   "main": "index.js",
   "repository": "https://github.com/elrumordelaluz/element-to-path.git",
-  "author": "Lionel T <elrumordelaluz@hotmail.com> (https://elrumordelaluz.com/)",
+  "author":
+    "Lionel T <elrumordelaluz@hotmail.com> (https://elrumordelaluz.com/)",
   "license": "MIT",
   "devDependencies": {
     "ava": "0.25.0",
@@ -14,16 +15,8 @@
   "scripts": {
     "test": "ava"
   },
-  "keywords": [
-    "svg",
-    "path",
-    "paths",
-    "conversion"
-  ],
-  "files": [
-    "index.js",
-    "README.md"
-  ],
+  "keywords": ["svg", "path", "paths", "conversion"],
+  "files": ["index.js", "path.js", "README.md"],
   "xo": {
     "esnext": true
   }

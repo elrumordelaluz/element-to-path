@@ -1,4 +1,6 @@
-const scale = (path, { scale = 1, scaleY, round }) => {
+const { chunkArray } = require('./utils')
+
+const scale = (path, { scale = 1, scaleY, round = 3 } = {}) => {
   const doValue = val => (round ? +val.toFixed(round) : val)
   const _x = scale
   const _y = scaleY || scale
@@ -14,10 +16,11 @@ const scale = (path, { scale = 1, scaleY, round }) => {
     }
 
     if (c === 'a') {
-      const [rx, ry, xAxisRotation, largeArcFlag, sweepFLag, x, y] = values
-      return {
-        command,
-        values: [
+      const chunked = chunkArray(values, 7)
+      const v = chunked.reduce((acc, next) => {
+        const [rx, ry, xAxisRotation, largeArcFlag, sweepFLag, x, y] = next
+        return [
+          ...acc,
           doValue(rx * _x),
           doValue(ry * _y),
           xAxisRotation,
@@ -25,7 +28,12 @@ const scale = (path, { scale = 1, scaleY, round }) => {
           sweepFLag,
           doValue(x * _x),
           doValue(y * _y),
-        ],
+        ]
+      }, [])
+
+      return {
+        command,
+        values: v,
       }
     }
 

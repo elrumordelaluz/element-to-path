@@ -16,7 +16,7 @@ const paramCounts = {
 const checkValues = (command, values) => {
   const c = command.toLowerCase()
   return paramCounts.hasOwnProperty(c)
-    ? paramCounts[c] === values.length
+    ? values.length === paramCounts[c] || values.length % paramCounts[c] === 0
     : false
 }
 

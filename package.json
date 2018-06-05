@@ -1,22 +1,33 @@
 {
   "name": "element-to-path",
   "version": "1.1.0",
-  "main": "index.js",
+  "main": "dist/element-to-path.cjs.js",
+  "module": "dist/element-to-path.esm.js",
+  "browser": "dist/element-to-path.umd.js",
   "repository": "https://github.com/elrumordelaluz/element-to-path.git",
-  "author":
-    "Lionel T <elrumordelaluz@hotmail.com> (https://elrumordelaluz.com/)",
+  "author": "Lionel T <elrumordelaluz@hotmail.com> (https://elrumordelaluz.com/)",
   "license": "MIT",
   "devDependencies": {
     "ava": "0.25.0",
-    "clipboardy": "1.2.3",
-    "fast-copy": "1.2.1",
-    "svgson-next": "4.0.0"
+    "rollup": "0.59.4"
   },
+  "keywords": [
+    "svg",
+    "path",
+    "paths",
+    "conversion"
+  ],
   "scripts": {
-    "test": "ava"
+    "prepare": "npm run build",
+    "test": "ava",
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "pretest": "npm run build"
   },
-  "keywords": ["svg", "path", "paths", "conversion"],
-  "files": ["index.js", "path.js", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "xo": {
     "esnext": true
   }

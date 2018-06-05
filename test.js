@@ -1,5 +1,5 @@
 import test from 'ava'
-import toPath from './'
+import toPath from './dist/element-to-path.cjs'
 
 const rect = {
   type: 'element',

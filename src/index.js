@@ -1,4 +1,4 @@
-const { chunkArray, calcValue } = require('./utils')
+import { chunkArray, calcValue } from './utils'
 
 const rect = attrs => {
   const w = +attrs.width
@@ -109,4 +109,4 @@ const elementToPath = (
   return toPathString(d)
 }
 
-module.exports = elementToPath
+export default elementToPath

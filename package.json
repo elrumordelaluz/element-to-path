@@ -9,7 +9,7 @@
   "license": "MIT",
   "devDependencies": {
     "ava": "0.25.0",
-    "rollup": "0.63.2"
+    "rollup": "0.67.1"
   },
   "keywords": [
     "svg",

@@ -59,12 +59,12 @@ const line = ({ x1, y1, x2, y2 }) => {
 const poly = attrs => {
   const { points } = attrs
   const pointsArray = points
-    .trim()
-    .split(' ')
+  .trim()
+  .split(' ')
     .reduce((arr, point) => {
-      return [...arr, ...(point.includes(',') ? point.split(',') : [point])]
-    }, [])
-
+    return [...arr,  ...(point.includes(',') ? point.split(',') : point.trim() !== '' ? [point] : [])]
+  }, [])
+  
   const pairs = chunkArray(pointsArray, 2)
   return pairs.map(([x, y], i) => {
     return `${i === 0 ? 'M' : 'L'}${x} ${y}`

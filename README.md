@@ -40,7 +40,7 @@ const path = toPath(circle)
 #### elem
 
 Type: `Object`
-Element to convert. Default notation is [svgson](https://github.com/elrumordelaluz/svgson-next) based:
+Element to convert. Default notation is [svgson](https://github.com/elrumordelaluz/svgson) based:
 
 ```js
 {
